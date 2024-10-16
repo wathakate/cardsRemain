@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import main.GamePanel;
 
 public class EnemyManager {
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    public ArrayList<Enemy> enemies = new ArrayList<>();
     GamePanel gp;
     public EnemyManager(GamePanel gp){
         this.gp = gp;
     }
-    public void add(Enemy e){
+    public void addEm(Enemy e){
         enemies.add(e);
     }
     public void draw(Graphics2D g){

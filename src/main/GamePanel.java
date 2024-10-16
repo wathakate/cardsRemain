@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import entity.Player;
+import entity.Spade;
 
 public class GamePanel extends JPanel implements Runnable {
     final int tileSize = 64;
@@ -29,6 +30,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        eManager.addEm(new Spade(this));
+        eManager.enemies.get(0).x =500;
+        eManager.enemies.get(0).y =200;
     }
 
     public void startGameThread(){
@@ -69,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         player.update();
+        eManager.enemies.get(0).y++;
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

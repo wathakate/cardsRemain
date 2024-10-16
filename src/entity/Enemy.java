@@ -13,7 +13,7 @@ public class Enemy extends Entity{
     
     public Enemy(GamePanel gp){
         this.gp = gp;
-        getImage("/res/enemy/neutral.png");
+        getImage("/res/enemy/testEm.png");
     }
     
 }
