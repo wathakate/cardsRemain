@@ -9,10 +9,12 @@ import main.KeyHandler;
 import javax.imageio.ImageIO;
 
 public class Player extends Entity{
+    public BufferedImage left, right, attack0, attack1, attack2, shoot;
     GamePanel gp;
     KeyHandler keyH;
     public int screenX;
     public int screenY;
+    public int spriteNum = 1;
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -21,108 +23,85 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.trueTileS/2);
         screenY = gp.screenHeight/2 - (gp.trueTileS/2);
 
-        hitbox = new Rectangle(8,8,32,32);
+        hitbox = new Rectangle(28,28,8,8);
 
         setDefaultValues();
-        getPlayerImage();
+        getImage();
     }
     public void setDefaultValues(){
-        x = 100;
-        y = 100;
-        speed = 4;
-        direction = "down";
-
+        x = gp.screenWidth/2 - (gp.trueTileS/2);;
+        y = gp.screenHeight/2 - (gp.trueTileS/2);;
+        speed = 8;
+        sprite = "neutral";
+        collTrue = true;
     }
 
-    public void getPlayerImage(){
+    public void getImage(){
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/res/player/boy_right_2.png"));
+            neutral = ImageIO.read(getClass().getResourceAsStream("/res/player/neutral.png"));
+            left = ImageIO.read(getClass().getResourceAsStream("/res/player/left.png"));
+            right = ImageIO.read(getClass().getResourceAsStream("/res/player/right.png"));
 
         } catch(IOException e){
             e.printStackTrace();
         }
     }
 
+    @Override
     public void update(){
         if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed){
             if (keyH.uPressed){
-                direction = "up";
                 y -= speed;
             }
             if (keyH.dPressed){
-                direction = "down";
                 y += speed;
             }
             if (keyH.lPressed){
-                direction = "left";
+                sprite = "left";
                 x -= speed;
             }
             if (keyH.rPressed){
-                direction = "right";
+                sprite = "right";
                 x += speed;
             }
             if (keyH.ePressed){
 
             }
-            collTrue = false;
 
-            spriteCounter++;
-            if (spriteCounter > 12) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2){
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }
         } else{
-            spriteNum = 1;
+            sprite = "neutral";
         }
-
+        bounds();
     }
+    @Override
     public void draw(Graphics2D g){
-        BufferedImage image = null;
-        switch (direction){
-            case "up":
-                if (spriteNum == 1) {
-                    image = up1;
-                }else if (spriteNum ==2) {
-                    image = up2;
-                }
-                break;
-            case "down":
-                if (spriteNum == 1) {
-                    image = down1;
-                } else if (spriteNum ==2) {
-                    image = down2;
-                }
-
+        image = null;
+        switch (sprite){
+            case "neutral":
+                image = neutral;
                 break;
             case "left":
-                if (spriteNum == 1) {
-                    image = left1;
-                } else if (spriteNum ==2) {
-                    image = left2;
-                }
-
+                image = left;
                 break;
             case "right":
-                if (spriteNum == 1) {
-                    image = right1;
-                } else if (spriteNum ==2) {
-                    image = right2;
-                }
-
+                image = right;
                 break;
         }
         g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
 
+    }
+    private void bounds(){
+        while((x-16) < screenX-150){
+            x++;
+        }
+        while((x+16) > (screenX+150)){
+            x--;
+        }
+        while((y-16) < (screenY-225)){
+            y++;
+        }
+        while((y+16) > (screenY+225)){
+            y--;
+        }
     }
 }

@@ -7,7 +7,7 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("idk");
+        window.setTitle("Cards remain");
 
         GamePanel gamepanel = new GamePanel();
         window.add(gamepanel);

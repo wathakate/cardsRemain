@@ -1,5 +1,6 @@
 package main;
 
+import entity.EnemyManager;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -8,18 +9,19 @@ import java.awt.Graphics2D;
 import entity.Player;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int tileSize = 16;
-    final int scale = 3;
-    public final int trueTileS = tileSize * scale;
-    final int maxScreenCol = 64;
-    final int maxScreenRow = 36;
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    final int tileSize = 64;
+    final float scale = (float) 0.5;
+    public final int trueTileS = (int) (tileSize * scale);
+    final int maxScreenCol = 32;
+    final int maxScreenRow = 18;
+    public final int screenWidth = trueTileS * maxScreenCol;
+    public final int screenHeight = trueTileS * maxScreenRow;
 
     public KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    public CollisionChecker cChecker = new CollisionChecker(this);
+    UserInterface UI = new UserInterface();
     Player player = new Player(this, keyH);
+    EnemyManager eManager = new EnemyManager(this);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -37,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        final double drawInterval = 1000000000/60;
+        final double drawInterval = 1000000000/30;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -74,6 +76,8 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
 
         player.draw(g2);
+        eManager.draw(g2);
+        UI.draw(g2);
         g2.dispose();
     }
 }
