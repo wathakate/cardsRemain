@@ -1,5 +1,6 @@
 package main;
 
+import UserInterface.UserInterface;
 import entity.EnemyManager;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -31,8 +32,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
         eManager.addEm(new Spade(this));
-        eManager.enemies.get(0).x =500;
-        eManager.enemies.get(0).y =200;
+        eManager.enemies.get(0).x = 500;
+        eManager.enemies.get(0).y = 200;
     }
 
     public void startGameThread(){
@@ -73,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update(){
         player.update();
-        eManager.enemies.get(0).y++;
+        eManager.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

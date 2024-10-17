@@ -18,4 +18,12 @@ public class EnemyManager {
             g.drawImage(enemies.get(i).image, enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS, null);
         }
     }
+    public void update(){
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).update();
+            if (enemies.get(i).isOffscreen()){
+                enemies.remove(i);
+            }
+        }
+    }
 }

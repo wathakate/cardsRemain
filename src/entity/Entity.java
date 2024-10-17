@@ -36,21 +36,22 @@ public class Entity {
         g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
 
     }
+
     static float xDir(int angle) {
         float radians = (float) (angle * PI / 180.0);
         return (float) cos(radians);
     }
-
     static float yDir(int angle) {
         float radians = (float) (angle * PI / 180.0);
         return (float) -sin(radians);
 
     }
+
     public boolean isOffscreen(){
-        if ((x-16) < (496-150) || (x+16) > (496+150)){
+        if ((x) < (496-150) || (x) > (496+150)){
             return true;
         }
-        else if ((y-16) < (272-225) || (y+16) > (272+225)){
+        else if ((y) < (0) || (y) > (272+225)){
             return true;
         }
         else{

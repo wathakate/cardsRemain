@@ -1,5 +1,7 @@
 package main;
 
+import UserInterface.UiPanel;
+
 import javax.swing.*;
 
 public class Main {
@@ -10,6 +12,7 @@ public class Main {
         window.setTitle("Cards remain");
 
         GamePanel gamepanel = new GamePanel();
+        UiPanel uipanel = new UiPanel();
         window.add(gamepanel);
         window.pack();
 
