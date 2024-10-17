@@ -1,7 +1,6 @@
-package UserInterface;
+package userInterface;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class UiPanel extends JPanel {
     public JLabel test;

@@ -1,6 +1,7 @@
 package main;
 
-import UserInterface.UserInterface;
+import entity.bullets.BulletManager;
+import userInterface.UserInterface;
 import entity.EnemyManager;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -11,8 +12,8 @@ import entity.Player;
 import entity.Spade;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int tileSize = 64;
-    final float scale = (float) 0.5;
+    final int tileSize = 32;
+    final float scale = (float) 1;
     public final int trueTileS = (int) (tileSize * scale);
     final int maxScreenCol = 32;
     final int maxScreenRow = 18;
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     UserInterface UI = new UserInterface();
     Player player = new Player(this, keyH);
     EnemyManager eManager = new EnemyManager(this);
+    BulletManager btest = new BulletManager(this, 500, 200, 20, 30, 4, 0);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -75,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update(){
         player.update();
         eManager.update();
+        btest.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -83,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         player.draw(g2);
         eManager.draw(g2);
+        btest.draw(g2);
         UI.draw(g2);
         g2.dispose();
     }

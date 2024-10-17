@@ -1,4 +1,4 @@
-package UserInterface;
+package userInterface;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

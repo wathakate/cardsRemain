@@ -1,6 +1,6 @@
 package main;
 
-import UserInterface.UiPanel;
+import userInterface.UiPanel;
 
 import javax.swing.*;
 

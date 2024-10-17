@@ -64,7 +64,7 @@ public class Player extends Entity{
                 sprite = "right";
                 x += speed;
             }
-            if (keyH.ePressed){
+            if (keyH.shotPressed){
 
             }
 

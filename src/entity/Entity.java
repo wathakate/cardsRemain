@@ -21,7 +21,7 @@ public class Entity {
     public boolean collTrue = false;
     GamePanel gp;
     
-    public void getImage(String l){
+    public void setImage(String l){
         try{
             image = ImageIO.read(getClass().getResourceAsStream(l));
         } catch(IOException e){
@@ -30,7 +30,7 @@ public class Entity {
     }
     public void update(){
         dirX = xDir(direction);
-        dirX = yDir(direction);
+        dirY = yDir(direction);
     }
     public void draw(Graphics2D g){
         g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
