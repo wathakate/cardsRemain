@@ -1,5 +1,7 @@
 package userInterface;
 
+import main.GamePanel;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -7,7 +9,9 @@ import javax.imageio.ImageIO;
 
 public class UserInterface {
     BufferedImage image;
-    public UserInterface(){
+    GamePanel gp;
+    public UserInterface(GamePanel gp){
+        this.gp = gp;
         getUiImage();
     }
     public void getUiImage(){
@@ -18,6 +22,6 @@ public class UserInterface {
         }
     }
     public void draw(Graphics2D g){
-        g.drawImage(image, 0, 0, 1024, 576, null);
+        g.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
     }
 }

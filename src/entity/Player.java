@@ -1,7 +1,6 @@
 package entity;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import main.GamePanel;
@@ -23,8 +22,6 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.trueTileS/2);
         screenY = gp.screenHeight/2 - (gp.trueTileS/2);
 
-        hitbox = new Rectangle(28,28,8,8);
-
         setDefaultValues();
         getImage();
     }
@@ -33,6 +30,7 @@ public class Player extends Entity{
         y = gp.screenHeight/2 - (gp.trueTileS/2);;
         speed = 8;
         sprite = "neutral";
+        hitbox = new Rectangle((x + (gp.trueTileS/2)) - 6,(y + (gp.trueTileS/2)) - 6,12,12);
         collTrue = true;
     }
 
@@ -52,17 +50,21 @@ public class Player extends Entity{
         if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed){
             if (keyH.uPressed){
                 y -= speed;
+                hitbox.y -= speed;
             }
             if (keyH.dPressed){
                 y += speed;
+                hitbox.y += speed;
             }
             if (keyH.lPressed){
                 sprite = "left";
                 x -= speed;
+                hitbox.x -= speed;
             }
             if (keyH.rPressed){
                 sprite = "right";
                 x += speed;
+                hitbox.x += speed;
             }
             if (keyH.shotPressed){
 
@@ -88,20 +90,27 @@ public class Player extends Entity{
                 break;
         }
         g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
-
+        g.setColor(Color.white);
+        g.fillOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        g.setColor(Color.red);
+        g.drawOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
     private void bounds(){
         while((x-16) < screenX-150){
             x++;
+            hitbox.x++;
         }
         while((x+16) > (screenX+150)){
             x--;
+            hitbox.x--;
         }
         while((y-16) < (screenY-225)){
             y++;
+            hitbox.y++;
         }
         while((y+16) > (screenY+225)){
             y--;
+            hitbox.y--;
         }
     }
 }

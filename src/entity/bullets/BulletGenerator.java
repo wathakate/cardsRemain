@@ -5,24 +5,30 @@ import main.GamePanel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BulletManager {
+public class BulletGenerator {
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    // Declarados en instanciacion
     GamePanel gp;
     int spawnX;
     int spawnY;
+    int amount;
     int interval;
     int speed;
     int dModifier;
+    // No declarados en instanciacion
     int frameInterval;
     int bAmount = 0;
+    int dir = 0;
 
-    public BulletManager(GamePanel gp, int spawnX, int spawnY, int amount, int interval, int speed, int dModifier){
+    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int interval, int speed, int dModifier){
         this.gp = gp;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
+        this.amount = amount;
         this.interval = interval;
         this.speed = speed;
         this.dModifier = dModifier;
+
         frameInterval = interval;
     }
     public void draw(Graphics2D g){
@@ -33,12 +39,17 @@ public class BulletManager {
     public void update(){
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).update();
+            if (bullets.get(i).isOffscreen()){
+                bullets.remove(i);
+            }
         }
-        if (frameInterval == 0){
-            bullets.add(new Bullet(gp, spawnX, spawnY, speed));
+        if (frameInterval == 0 && bAmount < amount){
+            bullets.add(new Bullet(gp, spawnX, spawnY, speed, dir));
+            bAmount++;
             frameInterval = interval;
         } else {
             frameInterval--;
         }
+        dir += dModifier;
     }
 }

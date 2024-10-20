@@ -11,8 +11,8 @@ public class Entity {
     public int x, y;
     public int speed;
     public int direction;
-    float dirX;
-    float dirY;
+    public float dirX;
+    public float dirY;
     
     public BufferedImage image;
     public BufferedImage neutral;
@@ -38,11 +38,11 @@ public class Entity {
     }
 
     static float xDir(int angle) {
-        float radians = (float) (angle * PI / 180.0);
+        float radians = (float) ((float)angle * PI / 180.0);
         return (float) cos(radians);
     }
     static float yDir(int angle) {
-        float radians = (float) (angle * PI / 180.0);
+        float radians = (float) ((float)angle * PI / 180.0);
         return (float) -sin(radians);
 
     }
