@@ -30,7 +30,7 @@ public class Player extends Entity{
         y = gp.screenHeight/2 - (gp.trueTileS/2);;
         speed = 8;
         sprite = "neutral";
-        hitbox = new Rectangle((x + (gp.trueTileS/2)) - 6,(y + (gp.trueTileS/2)) - 6,12,12);
+        hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
         collTrue = true;
     }
 
@@ -89,26 +89,27 @@ public class Player extends Entity{
                 image = right;
                 break;
         }
-        g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
+        g.drawImage(image, x, y, (int) (gp.trueTileS*1.5), (int) (gp.trueTileS * 1.5), null);
         g.setColor(Color.white);
         g.fillOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
         g.setColor(Color.red);
         g.drawOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        g.setColor(Color.red);
     }
     private void bounds(){
-        while((x-16) < screenX-150){
+        while((x-8) < (screenX-150)){
             x++;
             hitbox.x++;
         }
-        while((x+16) > (screenX+150)){
+        while((x+24) > (screenX+150)){
             x--;
             hitbox.x--;
         }
-        while((y-16) < (screenY-225)){
+        while((y-8) < (screenY-225)){
             y++;
             hitbox.y++;
         }
-        while((y+16) > (screenY+225)){
+        while((y+24) > (screenY+225)){
             y--;
             hitbox.y--;
         }

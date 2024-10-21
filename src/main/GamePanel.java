@@ -11,7 +11,7 @@ import entity.Player;
 import entity.Spade;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int tileSize = 64;
+    final int tileSize = 32;
     final float scale = (float) 1;
     public final int trueTileS = (int) (tileSize * scale);
     final int maxScreenCol = 32;
