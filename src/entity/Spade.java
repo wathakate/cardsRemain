@@ -8,6 +8,7 @@ public class Spade extends Enemy{
         speed = 2;
     }
 
+    @Override
     public void update() {
         super.update();
         y += speed;

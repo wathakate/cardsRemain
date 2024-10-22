@@ -26,4 +26,13 @@ public class EnemyManager {
             }
         }
     }
+    public void checkEmColl(Entity target){
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).collidingWith(target) && target.vulnerable < 0){
+                target.lives--;
+                target.vulnerable = 15;
+                System.out.println(target.lives);
+            }
+        }
+    }
 }
