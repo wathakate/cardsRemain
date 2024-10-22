@@ -58,4 +58,13 @@ public class Entity {
             return false;
         }
     }
+
+    public boolean collidingWith(Entity target){
+        if (hitbox.intersects(target.hitbox)){
+            System.out.println("collides");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -16,12 +16,13 @@ public class EnemyManager {
     public void draw(Graphics2D g){
         for (int i = 0; i < enemies.size(); i++) {
             g.drawImage(enemies.get(i).image, enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS, null);
+            g.drawRect(enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS);
         }
     }
-    public void update(){
+    public void update(Entity target){
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
-            if (enemies.get(i).isOffscreen()){
+            if (enemies.get(i).isOffscreen(target)){
                 enemies.remove(i);
             }
         }

@@ -2,10 +2,14 @@ package entity;
 
 import main.GamePanel;
 
+import java.awt.*;
+
 public class Spade extends Enemy{
     public Spade(GamePanel gp) {
         super(gp);
         speed = 2;
+        collTrue = true;
+        hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
     }
 
     public void update() {

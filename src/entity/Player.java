@@ -14,6 +14,8 @@ public class Player extends Entity{
     public int screenX;
     public int screenY;
     public int spriteNum = 1;
+    int maxHp = 5;
+    public int health;
 
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
@@ -29,6 +31,7 @@ public class Player extends Entity{
         x = gp.screenWidth/2 - (gp.trueTileS/2);;
         y = gp.screenHeight/2 - (gp.trueTileS/2);;
         speed = 8;
+        health = maxHp;
         sprite = "neutral";
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
         collTrue = true;

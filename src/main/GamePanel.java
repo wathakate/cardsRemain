@@ -1,5 +1,7 @@
 package main;
 
+import stages.Stage;
+import stages.teststage;
 import userInterface.UserInterface;
 import entity.EnemyManager;
 import java.awt.Color;
@@ -20,11 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = trueTileS * maxScreenRow;
 
     public KeyHandler keyH = new KeyHandler();
+    Stage stage = new teststage(this);
     Thread gameThread;
-    UserInterface UI = new UserInterface(this);
-    Player player = new Player(this, keyH);
-    EnemyManager eManager = new EnemyManager(this);
-
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -32,9 +31,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-        eManager.addEm(new Spade(this));
-        eManager.enemies.get(0).x = 500;
-        eManager.enemies.get(0).y = 200;
     }
 
     public void startGameThread(){
@@ -74,17 +70,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        player.update();
-        eManager.update();
+        stage.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D)g;
-
-        player.draw(g2);
-        eManager.draw(g2);
-        UI.draw(g2);
+        stage.draw(g2);
         g2.dispose();
     }
 }
