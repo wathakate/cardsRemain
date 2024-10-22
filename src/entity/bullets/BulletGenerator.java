@@ -21,7 +21,7 @@ public class BulletGenerator {
     int bAmount = 0;
     int dir = 0;
 
-    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int interval, int speed, int dModifier){
+    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int interval, int speed, int dModifier, int curve){
         this.gp = gp;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
