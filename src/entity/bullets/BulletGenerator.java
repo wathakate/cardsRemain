@@ -15,6 +15,7 @@ public class BulletGenerator {
     int interval;
     int speed;
     int dModifier;
+    int curve;
     // No declarados en instanciacion
     int frameInterval;
     int bAmount = 0;
