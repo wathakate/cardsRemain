@@ -1,8 +1,8 @@
 package stages;
 
-import entity.EnemyManager;
+import entity.enemies.EnemyManager;
 import entity.Player;
-import entity.Spade;
+import entity.enemies.Spade;
 import entity.bullets.BulletGenerator;
 import main.GamePanel;
 import main.KeyHandler;
@@ -18,7 +18,6 @@ public class stagetest extends Stage{
         UI = new UserInterface(gp);
         player = new Player(gp, this,keyH);
         eManager = new EnemyManager(gp);
-        btest = new BulletGenerator(gp, 500, 100, 100, 5, 10, 10, 0);
 
         eManager.addEm(new Spade(gp));
         eManager.enemies.get(0).x = 500;
@@ -38,6 +37,6 @@ public class stagetest extends Stage{
         player.draw(g2);
         btest.draw(g2);
         eManager.draw(g2);
-        //UI.draw(g2);
+        UI.draw(g2);
     }
 }

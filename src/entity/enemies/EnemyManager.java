@@ -1,7 +1,9 @@
-package entity;
+package entity.enemies;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import entity.LivingEntity;
 import main.GamePanel;
 
 public class EnemyManager {
@@ -27,11 +29,11 @@ public class EnemyManager {
             }
         }
     }
-    public void checkEmColl(Entity target){
+    public void checkEmColl(LivingEntity target){
         for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i).collidingWith(target) && target.vulnerable < 0){
+            if (enemies.get(i).collidingWith(target) && target.iframes < 0){
                 target.lives--;
-                target.vulnerable = 15;
+                target.iframes = 15;
                 System.out.println(target.lives);
             }
         }

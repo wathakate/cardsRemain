@@ -1,6 +1,6 @@
 package stages;
 
-import entity.EnemyManager;
+import entity.enemies.EnemyManager;
 import entity.Player;
 import main.GamePanel;
 import main.KeyHandler;

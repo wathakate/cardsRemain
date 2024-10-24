@@ -12,7 +12,7 @@ import stages.Stage;
 
 import javax.imageio.ImageIO;
 
-public class Player extends Entity{
+public class Player extends LivingEntity{
     public BufferedImage left, right, attack0, attack1, attack2, shoot;
     GamePanel gp;
     KeyHandler keyH;
@@ -20,12 +20,9 @@ public class Player extends Entity{
     public int screenX;
     public int screenY;
     public int spriteNum = 1;
-    int maxHp = 5;
-    public int health;
+    final int MAXLIVES = 5;
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    final int MAXLIVES = 5;
-    public int lives;
     int cooldown = 0;
 
     public Player(GamePanel gp, Stage stage, KeyHandler keyH){
@@ -43,7 +40,6 @@ public class Player extends Entity{
         x = gp.screenWidth/2 - (gp.trueTileS/2);;
         y = gp.screenHeight/2 - (gp.trueTileS/2);;
         speed = 8;
-        health = maxHp;
         sprite = "neutral";
         lives = MAXLIVES;
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
@@ -65,6 +61,9 @@ public class Player extends Entity{
     public void update(){
         updateBullets();
         if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed || keyH.shotPressed){
+            if (keyH.focusPressed){
+                speed = 4;
+            }
             if (keyH.uPressed){
                 y -= speed;
                 hitbox.y -= speed;
@@ -91,8 +90,9 @@ public class Player extends Entity{
         } else{
             sprite = "neutral";
         }
+        speed = 8;
         cooldown--;
-        vulnerable--;
+        iframes--;
         bounds();
     }
 
@@ -110,19 +110,21 @@ public class Player extends Entity{
 
     @Override
     public void draw(Graphics2D g){
-        image = null;
-        switch (sprite){
-            case "neutral":
-                image = neutral;
-                break;
-            case "left":
-                image = left;
-                break;
-            case "right":
-                image = right;
-                break;
+        // Sprite
+        if (iframes < 0) {
+            switch (sprite){
+                case "neutral":
+                    image = neutral;
+                    break;
+                case "left":
+                    image = left;
+                    break;
+                case "right":
+                    image = right;
+                    break;
+            }
+            g.drawImage(image, x, y, (int) (gp.trueTileS*1.5), (int) (gp.trueTileS * 1.5), null);
         }
-        g.drawImage(image, x, y, (int) (gp.trueTileS*1.5), (int) (gp.trueTileS * 1.5), null);
         // hitbox
         g.setColor(Color.white);
         g.fillOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
@@ -151,11 +153,11 @@ public class Player extends Entity{
             hitbox.y--;
         }
     }
-    public void checkEmColl(Entity target){
+    public void checkEmColl(LivingEntity target){
         for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).collidingWith(target) && target.vulnerable < 0){
+            if (bullets.get(i).collidingWith(target) && target.iframes < 0){
                 target.lives -= 10;
-                target.vulnerable = 5;
+                target.iframes = 5;
                 System.out.println(target.lives);
             }
         }

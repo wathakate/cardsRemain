@@ -1,15 +1,14 @@
-package entity;
+package entity.enemies;
 
-import entity.bullets.SpellCard;
+import entity.LivingEntity;
 import main.GamePanel;
 
 import java.awt.*;
 
-public class Enemy extends Entity{
+public class Enemy extends LivingEntity {
     GamePanel gp;
     String sprite;
     int scoreGiven;
-    SpellCard[] sp;
     
     public Enemy(GamePanel gp){
         this.gp = gp;

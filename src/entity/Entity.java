@@ -13,8 +13,6 @@ public class Entity {
     public int direction;
     public float dirX;
     public float dirY;
-    public int lives;
-    public int vulnerable = 0;
     
     public BufferedImage image;
     public BufferedImage neutral;
@@ -33,11 +31,9 @@ public class Entity {
     public void update(){
         dirX = xDir(direction);
         dirY = yDir(direction);
-        vulnerable--;
     }
     public void draw(Graphics2D g){
         g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
-
     }
 
     static float xDir(int angle) {
@@ -50,7 +46,7 @@ public class Entity {
 
     }
 
-    public boolean collidingWith(Entity target) {
+    public boolean collidingWith(LivingEntity target) {
         return hitbox.intersects(target.hitbox);
     }
 

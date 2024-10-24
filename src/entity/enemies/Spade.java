@@ -1,4 +1,4 @@
-package entity;
+package entity.enemies;
 
 import main.GamePanel;
 

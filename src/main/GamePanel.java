@@ -2,17 +2,12 @@ package main;
 
 import stages.Stage;
 import stages.stagetest;
-import userInterface.UserInterface;
-import entity.EnemyManager;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.*;
-
-import entity.Player;
-import entity.Spade;
 
 public class GamePanel extends JPanel implements Runnable {
     final int tileSize = 32;
