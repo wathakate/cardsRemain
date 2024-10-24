@@ -1,5 +1,7 @@
 package entity.bullets;
 
+import entity.Entity;
+import entity.Player;
 import main.GamePanel;
 
 import java.awt.*;
@@ -52,5 +54,14 @@ public class BulletGenerator {
             frameInterval--;
         }
         dir += dModifier;
+    }
+    public void checkBulletColl(Entity target){
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).collidingWith(target) && target.vulnerable < 0){
+                target.lives--;
+                target.vulnerable = 15;
+                System.out.println(target.lives);
+            }
+        }
     }
 }

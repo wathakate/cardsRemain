@@ -3,6 +3,8 @@ package entity.bullets;
 import entity.Entity;
 import main.GamePanel;
 
+import java.awt.*;
+
 public class Bullet extends Entity {
     GamePanel gp;
 
@@ -12,6 +14,7 @@ public class Bullet extends Entity {
         this.y = y;
         this.speed = speed;
         this.direction = direction;
+        hitbox = new Rectangle(x,y, gp.trueTileS, gp.trueTileS);
         setImage("/res/enemy/testEm.png");
     }
 
@@ -20,5 +23,7 @@ public class Bullet extends Entity {
         super.update();
         x = (int) (x + dirX * speed);
         y = (int) (y + dirY * speed);
+        hitbox.x = x;
+        hitbox.y = y;
     }
 }

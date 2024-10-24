@@ -1,7 +1,7 @@
 package main;
 
 import stages.Stage;
-import stages.teststage;
+import stages.stagetest;
 import userInterface.UserInterface;
 import entity.EnemyManager;
 import java.awt.Color;
@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = trueTileS * maxScreenRow;
 
     public KeyHandler keyH = new KeyHandler();
-    Stage stage = new teststage(this);
     Thread gameThread;
+    Stage stage = new stagetest(this, keyH);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -36,7 +36,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
-
     }
 
     @Override
@@ -74,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
         Graphics2D g2 = (Graphics2D)g;
         stage.draw(g2);
         g2.dispose();

@@ -12,6 +12,7 @@ public class Spade extends Enemy{
         hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
     }
 
+    @Override
     public void update() {
         super.update();
         y += speed;
