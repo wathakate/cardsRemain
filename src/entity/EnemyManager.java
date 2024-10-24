@@ -19,10 +19,10 @@ public class EnemyManager {
             g.drawRect(enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS);
         }
     }
-    public void update(Entity target){
+    public void update(){
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
-            if (enemies.get(i).isOffscreen()){
+            if (enemies.get(i).isOffscreen() || enemies.get(i).lives <= 0){
                 enemies.remove(i);
             }
         }

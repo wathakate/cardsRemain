@@ -11,15 +11,12 @@ import userInterface.UserInterface;
 import java.awt.*;
 
 public class stagetest extends Stage{
-    UserInterface UI;
-    Player player;
-    EnemyManager eManager;
     BulletGenerator btest;
 
     public stagetest(GamePanel gp, KeyHandler keyH) {
         super(gp, keyH);
         UI = new UserInterface(gp);
-        player = new Player(gp, keyH);
+        player = new Player(gp, this,keyH);
         eManager = new EnemyManager(gp);
         btest = new BulletGenerator(gp, 500, 100, 100, 5, 10, 10, 0);
 

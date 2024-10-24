@@ -26,7 +26,7 @@ public class Entity {
     public void setImage(String l){
         try{
             image = ImageIO.read(getClass().getResourceAsStream(l));
-        } catch(IOException e){
+        } catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -66,12 +66,4 @@ public class Entity {
         }
     }
 
-    public boolean collidingWith(Entity target){
-        if (hitbox.intersects(target.hitbox)){
-            System.out.println("collides");
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

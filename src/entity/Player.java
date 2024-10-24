@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import entity.bullets.Bullet;
 import main.GamePanel;
 import main.KeyHandler;
+import stages.Stage;
+
 import javax.imageio.ImageIO;
 
 public class Player extends Entity{
     public BufferedImage left, right, attack0, attack1, attack2, shoot;
     GamePanel gp;
     KeyHandler keyH;
+    Stage stage;
     public int screenX;
     public int screenY;
     public int spriteNum = 1;
@@ -25,9 +28,10 @@ public class Player extends Entity{
     public int lives;
     int cooldown = 0;
 
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, Stage stage, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
+        this.stage = stage;
 
         screenX = gp.screenWidth/2 - (gp.trueTileS/2);
         screenY = gp.screenHeight/2 - (gp.trueTileS/2);
@@ -98,7 +102,9 @@ public class Player extends Entity{
             if (bullets.get(i).isOffscreen()){
                 bullets.remove(i);
             }
-            //if (bullets.get(i).collidingWith())
+        }
+        for (int i = 0; i < stage.eManager.enemies.size(); i++) {
+            checkEmColl(stage.eManager.enemies.get(i));
         }
     }
 
@@ -143,6 +149,15 @@ public class Player extends Entity{
         while((y+24) > (screenY+225)){
             y--;
             hitbox.y--;
+        }
+    }
+    public void checkEmColl(Entity target){
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).collidingWith(target) && target.vulnerable < 0){
+                target.lives -= 10;
+                target.vulnerable = 5;
+                System.out.println(target.lives);
+            }
         }
     }
 }

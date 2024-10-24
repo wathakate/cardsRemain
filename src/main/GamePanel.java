@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.*;
+
 import entity.Player;
 import entity.Spade;
 
@@ -22,8 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = trueTileS * maxScreenRow;
 
     public KeyHandler keyH = new KeyHandler();
+    public int score;
     Thread gameThread;
-    Stage stage = new stagetest(this, keyH);
+    Stage stage;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -31,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        loadProgress();
     }
 
     public void startGameThread(){
@@ -77,5 +82,42 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
         stage.draw(g2);
         g2.dispose();
+    }
+
+    //Maneja t0do lo de guardar y cargar
+    public void saveProgress(int scr, int currentStage){
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("save.txt"));
+
+            bw.write(String.valueOf(scr)); // primera linea
+            bw.newLine();
+            bw.write(String.valueOf(currentStage)); // segunda linea
+            bw.newLine();
+            if (Integer.parseInt(br.readLine()) < scr){ // compara si tu puntaje es mejor a tu record anterior
+                bw.write(String.valueOf(scr)); // tercera linea
+            }
+            bw.newLine();
+            if (Integer.parseInt(br.readLine()) < currentStage){ // compara si el nivel guardado es mayor al que ya llegaste
+                bw.write(String.valueOf(currentStage)); // cuarta
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public void loadProgress(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("save.txt"));
+            score = Integer.parseInt(br.readLine()); // pone el puntaje
+            switch(Integer.parseInt(br.readLine())){ // pone el stage
+                case 101:
+                    stage = new stagetest(this, keyH);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
