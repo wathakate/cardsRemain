@@ -22,7 +22,7 @@ public class EnemyManager {
     public void update(Entity target){
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
-            if (enemies.get(i).isOffscreen(target)){
+            if (enemies.get(i).isOffscreen()){
                 enemies.remove(i);
             }
         }
