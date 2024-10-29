@@ -1,6 +1,8 @@
 package entity.enemies;
 
 import entity.LivingEntity;
+import entity.bullets.SpellCard;
+import entity.bullets.cards.fourShots;
 import main.GamePanel;
 
 import java.awt.*;
@@ -8,6 +10,7 @@ import java.awt.*;
 public class Enemy extends LivingEntity {
     GamePanel gp;
     String sprite;
+    int cooldown;
     int scoreGiven;
     
     public Enemy(GamePanel gp){
@@ -25,5 +28,6 @@ public class Enemy extends LivingEntity {
         }
         hitbox.x = x;
         hitbox.y = y;
+
     }
 }

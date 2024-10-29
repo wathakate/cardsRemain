@@ -8,14 +8,24 @@ import java.awt.*;
 public class Bullet extends Entity {
     GamePanel gp;
 
-    public Bullet(GamePanel gp, int x, int y, int speed, int direction) {
+    public Bullet(GamePanel gp, int x, int y, int speed, int direction, int type) {
         this.gp = gp;
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.direction = direction;
         hitbox = new Rectangle(x,y, gp.trueTileS, gp.trueTileS);
-        setImage("/res/enemy/testEm.png");
+        switch (type){
+            case 1:
+                setImage("/res/enemy/bullet_01.png");
+                break;
+            case 2:
+                setImage("/res/enemy/bullet_02.png");
+                break;
+            case 0:
+                setImage("/res/enemy/bullet_card.png");
+                break;
+        }
     }
 
     @Override

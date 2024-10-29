@@ -10,8 +10,8 @@ public class BulletGenerator {
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     // Declarados en instanciacion
     GamePanel gp;
-    int spawnX; // Donde en X
-    int spawnY; // Donde en Y
+    public int spawnX; // Donde en X
+    public int spawnY; // Donde en Y
     int amount; // Cantidad de balad
     int amPerCycle; // La cantidad de balas que se disparan al mismo tiempo
     int interval; // Cuantos frames tarda en disparar otra vez
@@ -19,13 +19,14 @@ public class BulletGenerator {
     int dModifier; // Cuanto cambia de angulo del BulletGenerator
     int perBlMod; //Complicado de explicar, revise update
     int curve; // Cuanto cambia el angulo de las balas
+    int type;
 
     // No declarados en instanciacion
     int frameInterval;
     int bAmount = 0;
-    int dir = 0;
+    public int dir = 0;
 
-    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,int curve){
+    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,int curve, int type){
         this.gp = gp;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
@@ -36,12 +37,13 @@ public class BulletGenerator {
         this.dModifier = dModifier;
         this.perBlMod = perBlMod;
         this.curve = curve;
+        this.type = type;
 
         frameInterval = interval;
     }
     public void draw(Graphics2D g){
         for (int i = 0; i < bullets.size(); i++) {
-            g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, gp.trueTileS, gp.trueTileS, null);
+            g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, (int) (gp.trueTileS/1.5), (int) (gp.trueTileS/1.5), null);
         }
     }
     public void update(){
@@ -55,7 +57,7 @@ public class BulletGenerator {
         if (frameInterval == 0 && bAmount < amount){
             int blDir = dir;
             for (int i = 0; i < amPerCycle; i++) {
-                bullets.add(new Bullet(gp, spawnX, spawnY, speed, blDir));
+                bullets.add(new Bullet(gp, spawnX, spawnY, speed, blDir, type));
                 blDir += perBlMod;
             }
             bAmount++;
@@ -70,7 +72,6 @@ public class BulletGenerator {
             if (bullets.get(i).collidingWith(target) && target.iframes < 0){
                 target.lives--;
                 target.iframes = 15;
-                System.out.println(target.lives);
             }
         }
     }

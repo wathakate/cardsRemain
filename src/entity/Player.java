@@ -83,7 +83,7 @@ public class Player extends LivingEntity{
                 hitbox.x += speed;
             }
             if (keyH.shotPressed && cooldown <= 0){
-                bullets.add(new Bullet(gp,x, y, 10, 90));
+                bullets.add(new Bullet(gp,x, y, 10, 90, 0));
                 cooldown = 5;
             }
 
@@ -132,7 +132,7 @@ public class Player extends LivingEntity{
         g.drawOval(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
         // Balas
         for (int i = 0; i < bullets.size(); i++) {
-            g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, gp.trueTileS, gp.trueTileS, null);
+            g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, (int) (gp.trueTileS/1.5), (int) (gp.trueTileS/1.5), null);
         }
     }
     private void bounds(){
