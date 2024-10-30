@@ -26,6 +26,9 @@ public class stagetest extends Stage{
         player.update();
         eManager.update();
         eManager.checkEmColl(player);
+        for (int i = 0; i < eManager.enemies.size(); i++) {
+            eManager.enemies.get(i);
+        }
     }
 
     @Override

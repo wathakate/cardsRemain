@@ -17,7 +17,7 @@ public class EnemyManager {
     }
     public void draw(Graphics2D g){
         for (int i = 0; i < enemies.size(); i++) {
-            g.drawImage(enemies.get(i).image, enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS, null);
+            enemies.get(i).draw(g);
             g.drawRect(enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS);
         }
     }
@@ -31,7 +31,7 @@ public class EnemyManager {
     }
     public void checkEmColl(LivingEntity target){
         for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i).collidingWith(target) && target.iframes < 0){
+            if ((enemies.get(i).collidingWith(target)) && target.iframes < 0){
                 target.lives--;
                 target.iframes = 15;
                 System.out.println(target.lives);

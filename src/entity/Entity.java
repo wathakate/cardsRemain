@@ -2,7 +2,6 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import static java.lang.Math.*;
 import javax.imageio.ImageIO;
 import main.GamePanel;
@@ -33,7 +32,7 @@ public class Entity {
         dirY = yDir(direction);
     }
     public void draw(Graphics2D g){
-        g.drawImage(image, x, y, gp.trueTileS, gp.trueTileS, null);
+        g.drawImage(image, x, y, 32, 32, null);
     }
 
     static float xDir(int angle) {
