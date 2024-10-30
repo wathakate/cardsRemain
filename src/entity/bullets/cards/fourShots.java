@@ -12,7 +12,13 @@ public class fourShots extends SpellCard {
         super(gp);
         this.x = x;
         this.y = y;
-        patterns.add(new BulletGenerator(gp, x, y, 4, 1, 1, 5, 1, 1, 0, 1));
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        patterns.add(new BulletGenerator(gp, x, y, 4, 1, 5, 5, 0, 0, 0, 1));
         patterns.get(patterns.size()-1).dir = -90;
+
     }
 }

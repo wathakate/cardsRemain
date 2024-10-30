@@ -2,7 +2,7 @@ package entity.enemies;
 
 import entity.LivingEntity;
 import entity.bullets.BulletGenerator;
-import entity.bullets.cards.cardDefinition;
+import entity.bullets.cards.CardDefinition;
 import entity.bullets.cards.fourShots;
 import entity.bullets.cards.fourShotsDef;
 import main.GamePanel;
@@ -18,7 +18,7 @@ public class Spade extends Enemy{
         lives = 30;
         scoreGiven = 15;
         collTrue = true;
-        sp = new cardDefinition[1];
+        sp = new CardDefinition[1];
         sp[0] = new fourShotsDef(gp, x, y);
         hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
     }
@@ -32,8 +32,10 @@ public class Spade extends Enemy{
         y += speed;
         cooldown--;
         if (cooldown <= 0){
+            //temporal
             temp.add(new BulletGenerator(gp, x, y, 4, 1, 5, 5, 0, 0, 0, 1));
-            temp.get(temp.size()-1).dir = -90;
+            temp.get(temp.size()-1).dir = -90; //
+            drawnCards.add(sp[0].drawCard());
             cooldown = 60;
         }
     }

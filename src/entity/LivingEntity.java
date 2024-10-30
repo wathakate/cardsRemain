@@ -1,7 +1,7 @@
 package entity;
 
 import entity.bullets.SpellCard;
-import entity.bullets.cards.cardDefinition;
+import entity.bullets.cards.CardDefinition;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class LivingEntity extends Entity {
     public int lives;
     public int iframes = 0; // Los cuadros en los que la entidad es invulnerable, funciona como timer
-    public cardDefinition[] sp;
+    public CardDefinition[] sp;
     public ArrayList<SpellCard> drawnCards = new ArrayList<>();
 
     @Override
