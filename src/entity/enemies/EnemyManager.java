@@ -12,8 +12,10 @@ public class EnemyManager {
     public EnemyManager(GamePanel gp){
         this.gp = gp;
     }
-    public void addEm(Enemy e){
+    public void addEm(Enemy e, int x, int y){
         enemies.add(e);
+        enemies.get(enemies.size()-1).x = x;
+        enemies.get(enemies.size()-1).y = y;
     }
     public void draw(Graphics2D g){
         for (int i = 0; i < enemies.size(); i++) {

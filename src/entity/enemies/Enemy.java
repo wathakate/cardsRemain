@@ -12,9 +12,13 @@ public class Enemy extends LivingEntity {
     String sprite;
     int cooldown;
     int scoreGiven;
+    int speedX;
+    int speedY;
     
-    public Enemy(GamePanel gp){
+    public Enemy(GamePanel gp, int speedX, int speedY){
         this.gp = gp;
+        this.speedX = speedX;
+        this.speedY = speedY;
         hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
         setImage("/res/enemy/testEm.png");
     }
@@ -26,8 +30,9 @@ public class Enemy extends LivingEntity {
             gp.score += scoreGiven;
             System.out.println(gp.score);
         }
+        x += speedX;
+        y += speedY;
         hitbox.x = x;
         hitbox.y = y;
-
     }
 }

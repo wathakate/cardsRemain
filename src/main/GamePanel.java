@@ -24,13 +24,12 @@ public class GamePanel extends JPanel implements Runnable {
     Stage stage;
 
     public GamePanel(){
+        loadProgress();
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(stage.backColor);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
-        loadProgress();
     }
 
     public void startGameThread(){

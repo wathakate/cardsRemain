@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SpellCard {
     public ArrayList<BulletGenerator> patterns = new ArrayList<>();
-    boolean finished;
+    boolean finished = false;
     public GamePanel gp;
 
     public SpellCard(GamePanel gp){
@@ -17,7 +17,7 @@ public class SpellCard {
 
     public void draw(Graphics2D g){
         for (int i = 0; i < patterns.size(); i++) {
-            patterns.get(i).update();
+            patterns.get(i).draw(g);
         }
 
     }

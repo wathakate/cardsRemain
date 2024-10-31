@@ -15,6 +15,7 @@ public class Stage {
     public EnemyManager eManager;
     public Color backColor;
     public BufferedImage backdrop;
+    public int tick = 0;
     UserInterface UI;
     Player player;
 
@@ -23,6 +24,7 @@ public class Stage {
         this.keyH = keyH;
     }
     public void update(){
+        tick++;
     }
     public void draw(Graphics2D g2){
     }

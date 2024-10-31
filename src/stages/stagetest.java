@@ -1,5 +1,6 @@
 package stages;
 
+import entity.bullets.cards.fourShots;
 import entity.enemies.EnemyManager;
 import entity.Player;
 import entity.enemies.Spade;
@@ -14,27 +15,27 @@ import java.util.ArrayList;
 public class stagetest extends Stage{
     public stagetest(GamePanel gp, KeyHandler keyH) {
         super(gp, keyH);
+        backColor = Color.CYAN;
         UI = new UserInterface(gp);
         player = new Player(gp, this,keyH);
         eManager = new EnemyManager(gp);
-        eManager.addEm(new Spade(gp));
-        eManager.enemies.get(0).x = 500;
-        eManager.enemies.get(0).y = 200;
     }
     @Override
     public void update(){
+        super.update();
+        if (tick == 1){
+            eManager.addEm(new Spade(gp, 0, 1), 500, 200);
+            System.out.println("a");
+        }
         player.update();
         eManager.update();
         eManager.checkEmColl(player);
-        for (int i = 0; i < eManager.enemies.size(); i++) {
-            eManager.enemies.get(i);
-        }
     }
 
     @Override
     public void draw(Graphics2D g2) {
         player.draw(g2);
         eManager.draw(g2);
-        //UI.draw(g2);
+        UI.draw(g2);
     }
 }

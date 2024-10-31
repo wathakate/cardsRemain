@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import entity.bullets.Bullet;
+import entity.bullets.cards.CardDefinition;
 import main.GamePanel;
 import main.KeyHandler;
 import stages.Stage;
@@ -16,14 +18,15 @@ public class Player extends LivingEntity{
     public BufferedImage left, right, attack0, attack1, attack2, shoot;
     GamePanel gp;
     KeyHandler keyH;
+    Random ran = new Random();
     Stage stage;
     public int screenX;
     public int screenY;
-    public int spriteNum = 1;
     final int MAXLIVES = 5;
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     int cooldown = 0;
+    int selection = 0;
 
     public Player(GamePanel gp, Stage stage, KeyHandler keyH){
         this.gp = gp;
@@ -44,6 +47,47 @@ public class Player extends LivingEntity{
         lives = MAXLIVES;
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
         collTrue = true;
+    }
+    public void setCards(){
+
+        sp = new CardDefinition[3];
+        for (int i = 0; i < 3; i++) {
+            cardCase(i);
+        }
+    }
+    public void cardCase(int i){
+        switch (ran.nextInt(10)){
+            case 0:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 1:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 2:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 3:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 4:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 5:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 6:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 7:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 8:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+            case 9:
+                sp[i] = new CardDefinition(gp, this);
+                break;
+        }
     }
 
     public void getImage(){
@@ -85,6 +129,16 @@ public class Player extends LivingEntity{
             if (keyH.shotPressed && cooldown <= 0){
                 bullets.add(new Bullet(gp,x, y, 10, 90, 0));
                 cooldown = 5;
+            }
+            if (keyH.lSelection){
+                if (selection > 0){
+                    selection--;
+                }
+            }
+            if (keyH.rSelection){
+                if (selection < 3){
+                    selection++;
+                }
             }
 
         } else{
@@ -155,11 +209,12 @@ public class Player extends LivingEntity{
     }
     public void checkEmColl(LivingEntity target){
         for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).collidingWith(target) && target.iframes < 0){
+            if ((bullets.get(i).collidingWith(target) ) && target.iframes < 0){
                 target.lives -= 10;
                 target.iframes = 5;
                 System.out.println(target.lives);
             }
+            drawnCards.get(i).checkBullColl(target);
         }
     }
 }
