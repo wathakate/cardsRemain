@@ -8,6 +8,8 @@ import java.util.Random;
 
 import entity.bullets.Bullet;
 import entity.bullets.cards.CardDefinition;
+import entity.bullets.cards.bombDef;
+import entity.bullets.cards.fourShotsDef;
 import main.GamePanel;
 import main.KeyHandler;
 import stages.Stage;
@@ -26,6 +28,7 @@ public class Player extends LivingEntity{
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     int cooldown = 0;
+    int cardCooldown = 0;
     int selection = 0;
 
     public Player(GamePanel gp, Stage stage, KeyHandler keyH){
@@ -47,13 +50,17 @@ public class Player extends LivingEntity{
         lives = MAXLIVES;
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
         collTrue = true;
+        //temp
+        setCards();
+        sp[0] = new bombDef(gp, this);
+        sp[1] = new fourShotsDef(gp, this);
     }
     public void setCards(){
 
         sp = new CardDefinition[3];
-        for (int i = 0; i < 3; i++) {
+        /*for (int i = 0; i < 3; i++) {
             cardCase(i);
-        }
+        }*/
     }
     public void cardCase(int i){
         switch (ran.nextInt(10)){
@@ -126,6 +133,11 @@ public class Player extends LivingEntity{
                 x += speed;
                 hitbox.x += speed;
             }
+
+        } else{
+            sprite = "neutral";
+        }
+        if (keyH.shotPressed || keyH.lSelection || keyH.rSelection || keyH.scPressed){
             if (keyH.shotPressed && cooldown <= 0){
                 bullets.add(new Bullet(gp,x, y, 10, 90, 0));
                 cooldown = 5;
@@ -133,19 +145,23 @@ public class Player extends LivingEntity{
             if (keyH.lSelection){
                 if (selection > 0){
                     selection--;
+                    System.out.println( selection);
                 }
             }
             if (keyH.rSelection){
-                if (selection < 3){
+                if (selection < 2){
                     selection++;
+                    System.out.println(selection);
                 }
             }
-
-        } else{
-            sprite = "neutral";
+            if (keyH.scPressed && cardCooldown <= 0){
+                drawnCards.add(sp[selection].drawCard());
+                cardCooldown = 60;
+            }
         }
         speed = 8;
         cooldown--;
+        cardCooldown--;
         iframes--;
         bounds();
     }
@@ -156,6 +172,9 @@ public class Player extends LivingEntity{
             if (bullets.get(i).isOffscreen()){
                 bullets.remove(i);
             }
+        }
+        for (int i = 0; i < drawnCards.size(); i++) {
+            drawnCards.get(i).update();
         }
         for (int i = 0; i < stage.eManager.enemies.size(); i++) {
             checkEmColl(stage.eManager.enemies.get(i));
@@ -188,6 +207,9 @@ public class Player extends LivingEntity{
         for (int i = 0; i < bullets.size(); i++) {
             g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, (int) (gp.trueTileS/1.5), (int) (gp.trueTileS/1.5), null);
         }
+        for (int i = 0; i < drawnCards.size(); i++) {
+            drawnCards.get(i).draw(g);
+        }
     }
     private void bounds(){
         while((x-8) < (screenX-150)){
@@ -212,9 +234,15 @@ public class Player extends LivingEntity{
             if ((bullets.get(i).collidingWith(target) ) && target.iframes < 0){
                 target.lives -= 10;
                 target.iframes = 5;
-                System.out.println(target.lives);
             }
-            drawnCards.get(i).checkBullColl(target);
+        }
+        if (!drawnCards.isEmpty()) {
+            for (int i = 0, originalHp = target.lives; i < drawnCards.size(); i++) {
+                drawnCards.get(i).checkBullColl(target);
+                if (target.lives < originalHp){
+                    target.iframes = 5;
+                }
+            }
         }
     }
 }

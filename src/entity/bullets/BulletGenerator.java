@@ -10,6 +10,7 @@ public class BulletGenerator {
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     // Declarados en instanciacion
     GamePanel gp;
+    public int damage;
     public int spawnX; // Donde en X
     public int spawnY; // Donde en Y
     int amount; // Cantidad de balad
@@ -26,8 +27,9 @@ public class BulletGenerator {
     int bAmount = 0;
     public int dir = 0;
 
-    public BulletGenerator(GamePanel gp, int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,int curve, int type){
+    public BulletGenerator(GamePanel gp,int damage,int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,int curve, int type){
         this.gp = gp;
+        this.damage = damage;
         this.spawnX = spawnX;
         this.spawnY = spawnY;
         this.amount = amount;

@@ -17,14 +17,14 @@ public class stagetest extends Stage{
         super(gp, keyH);
         backColor = Color.CYAN;
         UI = new UserInterface(gp);
-        player = new Player(gp, this,keyH);
+        player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);
     }
     @Override
     public void update(){
         super.update();
         if (tick == 1){
-            eManager.addEm(new Spade(gp, 0, 1), 500, 200);
+            eManager.addEm(new Spade(gp, 0, 0), 500, 200);
             System.out.println("a");
         }
         player.update();
