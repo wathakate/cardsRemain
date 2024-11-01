@@ -2,7 +2,7 @@ package userInterface;
 
 import main.GamePanel;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,8 +20,12 @@ public class UserInterface {
         } catch(IOException e){
             e.printStackTrace();
         }
+        //image = gp.stage.backDrop;
     }
     public void draw(Graphics2D g){
         g.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
+        g.setFont(g.getFont().deriveFont(Font.PLAIN, 48F));
+        g.setColor(Color.white);
+        g.draws
     }
 }

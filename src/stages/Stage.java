@@ -14,7 +14,7 @@ public class Stage {
     public KeyHandler keyH;
     public EnemyManager eManager;
     public Color backColor;
-    public BufferedImage backdrop;
+    public BufferedImage backDrop;
     public int tick = 0;
     UserInterface UI;
     Player player;

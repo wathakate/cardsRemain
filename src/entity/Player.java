@@ -10,6 +10,7 @@ import entity.bullets.Bullet;
 import entity.bullets.cards.CardDefinition;
 import entity.bullets.cards.bombDef;
 import entity.bullets.cards.fourShotsDef;
+import entity.bullets.cards.sideShotDef;
 import main.GamePanel;
 import main.KeyHandler;
 import stages.Stage;
@@ -53,7 +54,7 @@ public class Player extends LivingEntity{
         //temp
         setCards();
         sp[0] = new bombDef(gp, this);
-        sp[1] = new fourShotsDef(gp, this);
+        sp[1] = new sideShotDef(gp, this);
     }
     public void setCards(){
 
@@ -65,10 +66,10 @@ public class Player extends LivingEntity{
     public void cardCase(int i){
         switch (ran.nextInt(10)){
             case 0:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new bombDef(gp, this);
                 break;
             case 1:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new sideShotDef(gp, this);
                 break;
             case 2:
                 sp[i] = new CardDefinition(gp, this);
@@ -234,6 +235,7 @@ public class Player extends LivingEntity{
             if ((bullets.get(i).collidingWith(target) ) && target.iframes < 0){
                 target.lives -= 10;
                 target.iframes = 5;
+                bullets.remove(i);
             }
         }
         if (!drawnCards.isEmpty()) {

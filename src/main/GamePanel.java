@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     public KeyHandler keyH = new KeyHandler();
     public int score;
     Thread gameThread;
-    Stage stage;
+    public Stage stage;
 
     public GamePanel(){
         loadProgress();
@@ -113,5 +113,8 @@ public class GamePanel extends JPanel implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void updatePanel(){
+        this.setBackground(stage.backColor);
     }
 }

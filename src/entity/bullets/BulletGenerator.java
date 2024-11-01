@@ -72,7 +72,7 @@ public class BulletGenerator {
     public void checkBulletColl(LivingEntity target){
         for (int i = 0; i < bullets.size(); i++) {
             if (bullets.get(i).collidingWith(target) && target.iframes < 0){
-                target.lives--;
+                target.lives -= damage;
                 target.iframes = 15;
             }
         }
