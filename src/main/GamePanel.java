@@ -2,11 +2,9 @@ package main;
 
 import stages.Stage;
 import stages.stagetest;
-import java.awt.Color;
+
+import java.awt.*;
 import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.io.*;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -19,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = trueTileS * maxScreenRow;
 
     public KeyHandler keyH = new KeyHandler();
+    boolean isPaused = false;
     public int score;
     Thread gameThread;
     public Stage stage;
@@ -68,13 +67,23 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        stage.update();
+        if (keyH.pause){
+            isPaused = !isPaused;
+        }
+        if (!isPaused){
+            stage.update();
+        }
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
         stage.draw(g2);
+        if (isPaused){
+            g2.setFont(new Font("MS Gothic",Font.BOLD, 64));
+            g2.setColor(Color.white);
+            g.drawString("PAUSADO", (screenWidth/2)-115, screenHeight/2);
+        }
         g2.dispose();
     }
 

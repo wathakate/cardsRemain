@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean uPressed, dPressed, lPressed, rPressed, focusPressed, shotPressed, meleePressed, lSelection, rSelection, scPressed;
+    public boolean uPressed, dPressed, lPressed, rPressed, focusPressed, shotPressed, meleePressed, lSelection, rSelection, scPressed, pause;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -44,6 +44,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W) {
             scPressed = true;
         }
+        if (code == KeyEvent.VK_ESCAPE){
+            pause = true;
+        }
 
     }
 
@@ -80,6 +83,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_W) {
             scPressed = false;
+        }
+        if (code == KeyEvent.VK_ESCAPE){
+            pause = false;
         }
     }
 

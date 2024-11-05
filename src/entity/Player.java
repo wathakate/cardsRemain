@@ -28,6 +28,8 @@ public class Player extends LivingEntity{
     int cooldown = 0;
     int cardCooldown = 0;
     int selection = 0;
+    Rectangle melee;
+    int mActive = 0;
 
     public Player(GamePanel gp, Stage stage, KeyHandler keyH){
         this.gp = gp;
@@ -47,6 +49,7 @@ public class Player extends LivingEntity{
         sprite = "neutral";
         lives = MAXLIVES;
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
+        melee = new Rectangle(x - 2, y - 8, 48,24);
         collTrue = true;
         //temp
         setCards();
@@ -108,6 +111,7 @@ public class Player extends LivingEntity{
     @Override
     public void update(){
         updateBullets();
+        // movimiento
         if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed || keyH.shotPressed){
             if (keyH.focusPressed){
                 speed = 4;
@@ -115,29 +119,37 @@ public class Player extends LivingEntity{
             if (keyH.uPressed){
                 y -= speed;
                 hitbox.y -= speed;
+                melee.y -= speed;
             }
             if (keyH.dPressed){
                 y += speed;
                 hitbox.y += speed;
+                melee.y += speed;
             }
             if (keyH.lPressed){
                 sprite = "left";
                 x -= speed;
                 hitbox.x -= speed;
+                melee.x -= speed;
             }
             if (keyH.rPressed){
                 sprite = "right";
                 x += speed;
                 hitbox.x += speed;
+                melee.x += speed;
             }
 
         } else{
             sprite = "neutral";
         }
-        if (keyH.shotPressed || keyH.lSelection || keyH.rSelection || keyH.scPressed){
+        // ataques
+        if (keyH.shotPressed || keyH.lSelection || keyH.rSelection || keyH.scPressed || keyH.meleePressed){
             if (keyH.shotPressed && cooldown <= 0){
                 bullets.add(new Bullet(gp,x, y, 10, 90, 0));
                 cooldown = 5;
+            }
+            if (keyH.meleePressed){
+                mActive = 2;
             }
             if (keyH.lSelection){
                 if (selection > 0){
@@ -159,6 +171,7 @@ public class Player extends LivingEntity{
         speed = 8;
         cooldown--;
         cardCooldown--;
+        mActive--;
         iframes--;
         bounds();
     }
@@ -227,13 +240,15 @@ public class Player extends LivingEntity{
         }
     }
     public void checkEmColl(LivingEntity target){
+        // checkea las balas disparadas con e
         for (int i = 0; i < bullets.size(); i++) {
-            if ((bullets.get(i).collidingWith(target) ) && target.iframes < 0){
+            if ((bullets.get(i).collidingWith(target)) && target.iframes < 0){
                 target.lives -= 10;
                 target.iframes = 5;
                 bullets.remove(i);
             }
         }
+        // checkea las "cartas"
         if (!drawnCards.isEmpty()) {
             for (int i = 0, originalHp = target.lives; i < drawnCards.size(); i++) {
                 drawnCards.get(i).checkBullColl(target);
@@ -241,6 +256,11 @@ public class Player extends LivingEntity{
                     target.iframes = 5;
                 }
             }
+        }
+        // checkea el ataque de cerca
+        if (melee.intersects(target.hitbox) && mActive > 0 && target.iframes < 0){
+            target.lives -= 20;
+            target.iframes = 1;
         }
     }
 }
