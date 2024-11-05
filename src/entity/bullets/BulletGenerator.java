@@ -77,4 +77,9 @@ public class BulletGenerator {
             }
         }
     }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
 }
+

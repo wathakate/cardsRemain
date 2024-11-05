@@ -24,8 +24,14 @@ public class UserInterface {
     }
     public void draw(Graphics2D g){
         g.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
-        g.setFont(g.getFont().deriveFont(Font.PLAIN, 48F));
         g.setColor(Color.white);
-        g.draws
+        // Nivel
+        g.setFont(new Font("MS Gothic",Font.PLAIN, 24));
+        g.drawString("Nivel: "+gp.stage.name,100, 250);
+        // Puntaje
+        g.setFont(new Font("MS Gothic",Font.PLAIN, 24));
+        g.drawString("Puntaje:",800, 250);
+        g.setFont(new Font("MS Gothic",Font.PLAIN, 48));
+        g.drawString(Integer.toString(gp.score),750, 300);
     }
 }

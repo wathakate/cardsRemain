@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import entity.bullets.Bullet;
-import entity.bullets.cards.CardDefinition;
-import entity.bullets.cards.bombDef;
-import entity.bullets.cards.fourShotsDef;
-import entity.bullets.cards.sideShotDef;
+import entity.bullets.cards.*;
 import main.GamePanel;
 import main.KeyHandler;
 import stages.Stage;
@@ -53,8 +50,7 @@ public class Player extends LivingEntity{
         collTrue = true;
         //temp
         setCards();
-        sp[0] = new bombDef(gp, this);
-        sp[1] = new sideShotDef(gp, this);
+        sp[0] = new doubleDef(gp, this);
     }
     public void setCards(){
 
@@ -72,13 +68,13 @@ public class Player extends LivingEntity{
                 sp[i] = new sideShotDef(gp, this);
                 break;
             case 2:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new laserDef(gp, this);
                 break;
             case 3:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new summonsDef(gp, this);
                 break;
             case 4:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new doubleDef(gp, this);
                 break;
             case 5:
                 sp[i] = new CardDefinition(gp, this);

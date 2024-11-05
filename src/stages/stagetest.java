@@ -19,6 +19,7 @@ public class stagetest extends Stage{
         super(gp, keyH);
         backColor = Color.CYAN;
         backDrop = ImageIO.read(getClass().getResourceAsStream("/res/ui/testui.png"));
+        name = "0";
         UI = new UserInterface(gp);
         player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);

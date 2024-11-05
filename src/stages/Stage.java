@@ -13,6 +13,7 @@ public class Stage {
     public GamePanel gp;
     public KeyHandler keyH;
     public EnemyManager eManager;
+    public String name;
     public Color backColor;
     public BufferedImage backDrop;
     public int tick = 0;
