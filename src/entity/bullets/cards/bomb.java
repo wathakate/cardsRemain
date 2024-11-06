@@ -24,14 +24,14 @@ public class bomb extends SpellCard {
             bombY -= 3;
         }
         if (tick == 0){
-            patterns.add(new BulletGenerator(gp, 30,x, y, 1, 1, 0, 3, 0, 0, 0, 1));
+            patterns.add(new BulletGenerator(gp, 30,x, y, 1, 1, 0, 3, 0, 0, 0, 3));
             patterns.get(patterns.size()-1).dir = 90;
             bombX = x;
             bombY = y;
         }
         if (tick == 60){
             patterns.remove(0);
-            patterns.add(new BulletGenerator(gp, 10,bombX, bombY, 4, 16, 5, 5, 10, 22, 0, 1));
+            patterns.add(new BulletGenerator(gp, 10,bombX, bombY, 4, 16, 5, 5, 10, 22, 0, 3));
             patterns.get(patterns.size()-1).dir = 90;
         }
         tick++;

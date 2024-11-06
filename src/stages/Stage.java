@@ -29,4 +29,8 @@ public class Stage {
     }
     public void draw(Graphics2D g2){
     }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

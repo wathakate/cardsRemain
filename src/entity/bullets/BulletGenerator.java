@@ -46,6 +46,7 @@ public class BulletGenerator {
     public void draw(Graphics2D g){
         for (int i = 0; i < bullets.size(); i++) {
             g.drawImage(bullets.get(i).image, bullets.get(i).x, bullets.get(i).y, (int) (gp.trueTileS/1.5), (int) (gp.trueTileS/1.5), null);
+            //bullets.get(i).draw(g);
         }
     }
     public void update(){

@@ -27,7 +27,7 @@ public class Player extends LivingEntity{
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     int cooldown = 0;
     int cardCooldown = 0;
-    int selection = 0;
+    public int selection = 0;
     Rectangle melee;
     int mActive = 0;
 
@@ -51,19 +51,16 @@ public class Player extends LivingEntity{
         hitbox = new Rectangle(x + gp.trueTileS/2,y + gp.trueTileS/2 ,12,12);
         melee = new Rectangle(x - 2, y - 8, 48,24);
         collTrue = true;
-        //temp
         setCards();
-        sp[0] = new doubleDef(gp, this);
     }
     public void setCards(){
-
         sp = new CardDefinition[3];
-        /*for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             cardCase(i);
-        }*/
+        }
     }
     public void cardCase(int i){
-        switch (ran.nextInt(10)){
+        switch (ran.nextInt(6)){
             case 0:
                 sp[i] = new bombDef(gp, this);
                 break;
@@ -80,9 +77,10 @@ public class Player extends LivingEntity{
                 sp[i] = new doubleDef(gp, this);
                 break;
             case 5:
-                sp[i] = new CardDefinition(gp, this);
+                sp[i] = new tripleDef(gp, this);
                 break;
-            case 6:
+            /* por si necesito mas cosas
+                case 6:
                 sp[i] = new CardDefinition(gp, this);
                 break;
             case 7:
@@ -93,7 +91,7 @@ public class Player extends LivingEntity{
                 break;
             case 9:
                 sp[i] = new CardDefinition(gp, this);
-                break;
+                break;*/
         }
     }
 
@@ -165,6 +163,7 @@ public class Player extends LivingEntity{
             }
             if (keyH.scPressed && cardCooldown <= 0){
                 drawnCards.add(sp[selection].drawCard());
+                cardCase(selection);
                 cardCooldown = 60;
             }
         }

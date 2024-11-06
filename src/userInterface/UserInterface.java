@@ -23,8 +23,11 @@ public class UserInterface {
         //image = gp.stage.backDrop;
     }
     public void draw(Graphics2D g){
+        //ui
         g.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
         g.setColor(Color.white);
+        //carta
+        g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection].getCard(), 460, 494, 105, 131,null);
         // Nivel
         g.setFont(new Font("MS Gothic",Font.PLAIN, 24));
         g.drawString("Nivel: "+gp.stage.name,100, 250);

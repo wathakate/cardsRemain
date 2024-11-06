@@ -11,8 +11,8 @@ public class summons extends SpellCard {
         super(gp);
         this.parent = parent;
         // "amigos"
-        patterns.add(new BulletGenerator(gp, 5, parent.x + 64, parent.y, 90, 1, 0, 0, 0 ,0, 1, 1));
-        patterns.add(new BulletGenerator(gp, 5, parent.x - 32, parent.y, 90, 1, 0, 0, 0 ,0, 1, 1));
+        patterns.add(new BulletGenerator(gp, 5, parent.x + 64, parent.y, 90, 1, 0, 0, 0 ,0, 1, 3));
+        patterns.add(new BulletGenerator(gp, 5, parent.x - 32, parent.y, 90, 1, 0, 0, 0 ,0, 1, 3));
         // las balas en si
         patterns.add(new BulletGenerator(gp, 5, parent.x + 32, parent.y + 16,20, 1, 3, 10, 0, 0, 0, 0 ));
         patterns.add(new BulletGenerator(gp, 5, parent.x - 16, parent.y + 16,20, 1, 3, 10, 0, 0, 0, 0 ));
