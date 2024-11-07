@@ -1,8 +1,10 @@
 package stages;
 
 import entity.bullets.cards.fourShots;
+import entity.enemies.Diamond;
 import entity.enemies.EnemyManager;
 import entity.Player;
+import entity.enemies.Hearth;
 import entity.enemies.Spade;
 import entity.bullets.BulletGenerator;
 import main.GamePanel;
@@ -28,7 +30,7 @@ public class stagetest extends Stage{
     public void update(){
         super.update();
         if (tick == 1){
-            eManager.addEm(new Spade(gp, 0, 0), 500, 200);
+            eManager.addEm(new Hearth(gp, 0, 0), 500, 200);
             System.out.println("a");
         }
         player.update();

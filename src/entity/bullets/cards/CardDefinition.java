@@ -17,11 +17,6 @@ public class CardDefinition {
     public CardDefinition(GamePanel gp, Entity parent) {
         this.gp = gp;
         this.parent = parent;
-        try {
-            card = ImageIO.read(getClass().getResourceAsStream("/res/cardArt/bomb.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     public SpellCard drawCard(){
         return sp;

@@ -1,7 +1,6 @@
 package main;
 
-import stages.Stage;
-import stages.stagetest;
+import stages.*;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -36,14 +35,18 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
+    final double drawInterval = 1000000000/30;
+    double delta = 0;
+    long lastTime = System.nanoTime();
+    long currentTime;
+    long timer = 0;
+    int drawcount = 0;
     @Override
     public void run() {
-        final double drawInterval = 1000000000/30;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
-        long timer = 0;
-        int drawcount = 0;
+        delta = 0;
+        lastTime = System.nanoTime();
+        timer = 0;
+        drawcount = 0;
 
         while (gameThread != null){
             currentTime = System.nanoTime();
@@ -118,6 +121,25 @@ public class GamePanel extends JPanel implements Runnable {
             switch(Integer.parseInt(br.readLine())){ // pone el stage
                 case 101:
                     stage = new stagetest(this, keyH);
+                    break;
+                case 1:
+                    stage = new Stage01(this, keyH);
+                    break;
+                case 2:
+                    stage = new Stage02(this, keyH);
+                    break;
+                case 3:
+                    stage = new Stage03(this, keyH);
+                    break;
+                case 4:
+                    stage = new Stage04(this, keyH);
+                    break;
+                case 5:
+                    stage = new Stage05(this, keyH);
+                    break;
+                case 6:
+                    stage = new Stage06(this, keyH);
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();

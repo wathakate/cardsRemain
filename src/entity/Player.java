@@ -28,6 +28,7 @@ public class Player extends LivingEntity{
     int cooldown = 0;
     int cardCooldown = 0;
     public int selection = 0;
+    int selCooldown = 0;
     Rectangle melee;
     int mActive = 0;
 
@@ -44,7 +45,7 @@ public class Player extends LivingEntity{
     }
     public void setDefaultValues(){
         x = gp.screenWidth/2 - (gp.trueTileS/2);;
-        y = gp.screenHeight/2 - (gp.trueTileS/2);;
+        y = gp.screenHeight/2 + 150 - (gp.trueTileS/2);;
         speed = 8;
         sprite = "neutral";
         lives = MAXLIVES;
@@ -143,21 +144,23 @@ public class Player extends LivingEntity{
         // ataques
         if (keyH.shotPressed || keyH.lSelection || keyH.rSelection || keyH.scPressed || keyH.meleePressed){
             if (keyH.shotPressed && cooldown <= 0){
-                bullets.add(new Bullet(gp,x, y, 10, 90, 0));
-                cooldown = 5;
+                bullets.add(new Bullet(gp,x + 8, y, 10, 90, 0));
+                cooldown = 2;
             }
             if (keyH.meleePressed){
                 mActive = 2;
             }
             if (keyH.lSelection){
-                if (selection > 0){
+                if (selection > 0 && selCooldown <= 0){
                     selection--;
+                    selCooldown = 2;
                     System.out.println( selection);
                 }
             }
-            if (keyH.rSelection){
+            if (keyH.rSelection && selCooldown <= 0){
                 if (selection < 2){
                     selection++;
+                    selCooldown = 2;
                     System.out.println(selection);
                 }
             }
@@ -170,6 +173,7 @@ public class Player extends LivingEntity{
         speed = 8;
         cooldown--;
         cardCooldown--;
+        selCooldown--;
         mActive--;
         iframes--;
         bounds();
@@ -242,7 +246,7 @@ public class Player extends LivingEntity{
         // checkea las balas disparadas con e
         for (int i = 0; i < bullets.size(); i++) {
             if ((bullets.get(i).collidingWith(target)) && target.iframes < 0){
-                target.lives -= 10;
+                target.lives -= 8;
                 target.iframes = 5;
                 bullets.remove(i);
             }
