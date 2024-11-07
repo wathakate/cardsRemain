@@ -93,18 +93,23 @@ public class GamePanel extends JPanel implements Runnable {
     //Maneja t0do lo de guardar y cargar
     public void saveProgress(int scr, int currentStage){
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
+            int originalScore;
+            int originalStage;
             BufferedReader br = new BufferedReader(new FileReader("save.txt"));
+            originalScore = Integer.parseInt(br.readLine().trim());
+            originalStage = Integer.parseInt(br.readLine().trim());
+            br.close();
 
+            BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
             bw.write(String.valueOf(scr)); // primera linea
             bw.newLine();
             bw.write(String.valueOf(currentStage)); // segunda linea
             bw.newLine();
-            if (Integer.parseInt(br.readLine()) < scr){ // compara si tu puntaje es mejor a tu record anterior
+            if (originalScore < scr){ // compara si tu puntaje es mejor a tu record anterior
                 bw.write(String.valueOf(scr)); // tercera linea
             }
             bw.newLine();
-            if (Integer.parseInt(br.readLine()) < currentStage){ // compara si el nivel guardado es mayor al que ya llegaste
+            if (originalStage < currentStage){ // compara si el nivel guardado es mayor al que ya llegaste
                 bw.write(String.valueOf(currentStage)); // cuarta
             }
 
@@ -117,8 +122,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void loadProgress(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("save.txt"));
-            score = Integer.parseInt(br.readLine()); // pone el puntaje
-            switch(Integer.parseInt(br.readLine())){ // pone el stage
+            score = Integer.parseInt(br.readLine().trim()); // pone el puntaje
+            switch(Integer.parseInt(br.readLine().trim())){ // pone el stage
                 case 101:
                     stage = new stagetest(this, keyH);
                     break;

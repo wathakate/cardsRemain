@@ -28,16 +28,12 @@ public class UserInterface {
         g.setColor(Color.white);
         //carta
             // seleccion -1
-        if (gp.stage.getPlayer().selection > 0){
-            g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection-1].getCard(), 370, 500, 90, 116,null);
-        } else {
-            g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection+1].getCard(), 370, 500, 90, 116,null);
+        if (gp.stage.getPlayer().selection > 0) {
+            g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection - 1].getCard(), 370, 500, 90, 116, null);
         }
             // seleccion +1
         if (gp.stage.getPlayer().selection < 2){
             g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection+1].getCard(), 560, 500, 90, 116,null);
-        } else {
-            g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection-1].getCard(), 560, 500, 90, 116,null);
         }
             // seleccion
         g.drawImage(gp.stage.getPlayer().sp[gp.stage.getPlayer().selection].getCard(), 460, 494, 105, 131,null);

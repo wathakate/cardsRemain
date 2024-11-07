@@ -11,6 +11,6 @@ public class fourShotsDef extends CardDefinition{
     }
     @Override
     public SpellCard drawCard() {
-        return new fourShots(gp, parent.x, parent.y + 32);
+        return new fourShots(gp, parent);
     }
 }

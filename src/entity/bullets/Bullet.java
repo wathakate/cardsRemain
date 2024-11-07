@@ -40,8 +40,8 @@ public class Bullet extends Entity {
         super.update();
         x = (int) (x + dirX * speed);
         y = (int) (y + dirY * speed);
-        hitbox.x = x + 6;
-        hitbox.y = y + 16;
+        hitbox.x = x + 2;
+        hitbox.y = y + 2;
     }
 
     @Override

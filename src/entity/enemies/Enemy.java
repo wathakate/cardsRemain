@@ -35,4 +35,14 @@ public class Enemy extends LivingEntity {
         hitbox.x = x;
         hitbox.y = y;
     }
+    public void checkColl(LivingEntity target){
+        if (!drawnCards.isEmpty()) {
+            for (int i = 0, originalHp = target.lives; i < drawnCards.size(); i++) {
+                drawnCards.get(i).checkBullColl(target);
+                if (target.lives < originalHp){
+                    target.iframes = 5;
+                }
+            }
+        }
+    }
 }

@@ -22,7 +22,7 @@ public class Player extends LivingEntity{
     Stage stage;
     public int screenX;
     public int screenY;
-    final int MAXLIVES = 5;
+    final int MAXLIVES = 10;
 
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     int cooldown = 0;
@@ -109,6 +109,9 @@ public class Player extends LivingEntity{
 
     @Override
     public void update(){
+        if (lives < 0){
+            gp.loadProgress();
+        }
         updateBullets();
         // movimiento
         if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed || keyH.shotPressed){
@@ -153,14 +156,14 @@ public class Player extends LivingEntity{
             if (keyH.lSelection){
                 if (selection > 0 && selCooldown <= 0){
                     selection--;
-                    selCooldown = 2;
+                    selCooldown = 3;
                     System.out.println( selection);
                 }
             }
             if (keyH.rSelection && selCooldown <= 0){
                 if (selection < 2){
                     selection++;
-                    selCooldown = 2;
+                    selCooldown = 3;
                     System.out.println(selection);
                 }
             }
@@ -245,9 +248,11 @@ public class Player extends LivingEntity{
     public void checkEmColl(LivingEntity target){
         // checkea las balas disparadas con e
         for (int i = 0; i < bullets.size(); i++) {
-            if ((bullets.get(i).collidingWith(target)) && target.iframes < 0){
-                target.lives -= 8;
-                target.iframes = 5;
+            if (bullets.get(i).collidingWith(target)){
+                if (target.iframes < 0){
+                    target.lives -= 8;
+                    target.iframes = 5;
+                }
                 bullets.remove(i);
             }
         }

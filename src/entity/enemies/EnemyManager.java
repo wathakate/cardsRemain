@@ -38,6 +38,7 @@ public class EnemyManager {
                 target.iframes = 15;
                 System.out.println(target.lives);
             }
+            enemies.get(i).checkColl(target);
         }
     }
 }
