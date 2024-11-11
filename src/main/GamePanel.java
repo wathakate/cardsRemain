@@ -1,10 +1,13 @@
 package main;
 
 import stages.*;
+import stages.Menu;
 
 import java.awt.*;
 import javax.swing.JPanel;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class GamePanel extends JPanel implements Runnable {
     final int tileSize = 32;
@@ -15,14 +18,14 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = trueTileS * maxScreenCol;
     public final int screenHeight = trueTileS * maxScreenRow;
 
+    BorderLayout bl = new BorderLayout();
     public KeyHandler keyH = new KeyHandler();
     boolean isPaused = false;
     public int score;
     Thread gameThread;
-    public Stage stage;
+    public Stage stage = new Menu(this, keyH);
 
     public GamePanel(){
-        loadProgress();
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(stage.backColor);
         this.setDoubleBuffered(true);
@@ -93,11 +96,13 @@ public class GamePanel extends JPanel implements Runnable {
     //Maneja t0do lo de guardar y cargar
     public void saveProgress(int scr, int currentStage){
         try {
-            int originalScore;
-            int originalStage;
+            int originalScore = 0;
+            int originalStage = 1;
             BufferedReader br = new BufferedReader(new FileReader("save.txt"));
-            originalScore = Integer.parseInt(br.readLine().trim());
-            originalStage = Integer.parseInt(br.readLine().trim());
+            if (!Files.readAllLines(Paths.get("save.txt")).isEmpty()) {
+                originalScore = Integer.parseInt(br.readLine().trim());
+                originalStage = Integer.parseInt(br.readLine().trim());
+            }
             br.close();
 
             BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
@@ -107,11 +112,17 @@ public class GamePanel extends JPanel implements Runnable {
             bw.newLine();
             if (originalScore < scr){ // compara si tu puntaje es mejor a tu record anterior
                 bw.write(String.valueOf(scr)); // tercera linea
+            } else {
+                bw.write(String.valueOf(originalScore));
             }
             bw.newLine();
             if (originalStage < currentStage){ // compara si el nivel guardado es mayor al que ya llegaste
                 bw.write(String.valueOf(currentStage)); // cuarta
+            } else {
+                bw.write(String.valueOf(originalStage));
             }
+            bw.flush();
+            bw.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -122,35 +133,44 @@ public class GamePanel extends JPanel implements Runnable {
     public void loadProgress(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("save.txt"));
-            score = Integer.parseInt(br.readLine().trim()); // pone el puntaje
-            switch(Integer.parseInt(br.readLine().trim())){ // pone el stage
-                case 101:
-                    stage = new stagetest(this, keyH);
-                    break;
-                case 1:
-                    stage = new Stage01(this, keyH);
-                    break;
-                case 2:
-                    stage = new Stage02(this, keyH);
-                    break;
-                case 3:
-                    stage = new Stage03(this, keyH);
-                    break;
-                case 4:
-                    stage = new Stage04(this, keyH);
-                    break;
-                case 5:
-                    stage = new Stage05(this, keyH);
-                    break;
-                case 6:
-                    stage = new Stage06(this, keyH);
-                    break;
+
+            if (!Files.readAllLines(Paths.get("save.txt")).isEmpty()) {
+                score = Integer.parseInt(br.readLine().trim()); // pone el puntaje
+                switch(Integer.parseInt(br.readLine().trim())){ // pone el stage
+                    case 101:
+                        stage = new stagetest(this, keyH);
+                        break;
+                    case 1:
+                        stage = new Stage01(this, keyH);
+                        break;
+                    case 2:
+                        stage = new Stage02(this, keyH);
+                        break;
+                    case 3:
+                        stage = new Stage03(this, keyH);
+                        break;
+                    case 4:
+                        stage = new Stage04(this, keyH);
+                        break;
+                    case 5:
+                        stage = new Stage05(this, keyH);
+                        break;
+                    case 6:
+                        stage = new Stage06(this, keyH);
+                        break;
+                    default:
+                        stage = new Menu(this,keyH);
+                }
+            } else {
+                System.out.println("Error leyendo save.txt");
+                score = 0;
+                stage = new Stage01(this, keyH);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void updatePanel(){
-        this.setBackground(stage.backColor);
+    public void updatePanel(Color backcolor){
+        this.setBackground(backcolor);
     }
 }

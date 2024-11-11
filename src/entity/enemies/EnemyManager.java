@@ -20,7 +20,7 @@ public class EnemyManager {
     public void draw(Graphics2D g){
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(g);
-            g.drawRect(enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS);
+            //g.drawRect(enemies.get(i).x, enemies.get(i).y, gp.trueTileS, gp.trueTileS);
         }
     }
     public void update(){

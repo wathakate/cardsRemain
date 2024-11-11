@@ -21,7 +21,7 @@ public class Stage01 extends Stage{
         player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);
         gp.saveProgress(gp.score, Integer.parseInt(name));
-        //gp.updatePanel();
+        gp.updatePanel(backColor);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Stage01 extends Stage{
             eManager.addEm(new Spade(gp, 1, 0),350,300);
             eManager.addEm(new Spade(gp, -1, 0),625,300);
         }
-        if (tick == 1500){
+        if (tick == 1250){
             gp.stage = new Stage02(gp, keyH);
         }
     }
@@ -91,7 +91,7 @@ public class Stage01 extends Stage{
         player.draw(g2);
         eManager.draw(g2);
         UI.draw(g2);
-        if (tick >= 1000 && tick < 1500){
+        if (tick >= 1000 && tick < 1250){
             g2.setFont(new Font("MS Gothic",Font.BOLD, 64));
             g2.setColor(Color.white);
             g2.drawString("COMPLETADO", (gp.screenWidth/2)-175, gp.screenHeight/2);

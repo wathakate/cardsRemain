@@ -16,6 +16,7 @@ public class Diamond extends Enemy{
         sp = new CardDefinition[1];
         sp[0] = new diamondDef(gp, this);
         hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
+        setImage("/res/enemy/diamond.png");
     }
 
     @Override
@@ -24,7 +25,7 @@ public class Diamond extends Enemy{
         cooldown--;
         if (cooldown < 0){
             drawnCards.add(sp[0].drawCard());
-            cooldown = 30;
+            cooldown = 60;
         }
     }
 }

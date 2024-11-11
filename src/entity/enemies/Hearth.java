@@ -17,6 +17,7 @@ public class Hearth extends Enemy{
         sp = new CardDefinition[1];
         sp[0] = new hearthDef(gp, this);
         hitbox = new Rectangle(x, y, gp.trueTileS, gp.trueTileS);
+        setImage("/res/enemy/hearth.png");
     }
 
     @Override
