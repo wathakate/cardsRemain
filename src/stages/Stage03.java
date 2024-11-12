@@ -16,6 +16,7 @@ public class Stage03 extends Stage{
         backColor = Color.pink;
         name = "3";
         UI = new UserInterface(gp);
+        UI.setUiImage("/res/ui/stage03.png");
         player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);
         gp.saveProgress(gp.score, Integer.parseInt(name));

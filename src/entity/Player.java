@@ -15,7 +15,7 @@ import stages.Stage;
 import javax.imageio.ImageIO;
 
 public class Player extends LivingEntity{
-    public BufferedImage left, right, attack0, attack1, attack2, shoot;
+    public BufferedImage left, right, attack, shoot;
     GamePanel gp;
     KeyHandler keyH;
     Random ran = new Random();
@@ -101,7 +101,8 @@ public class Player extends LivingEntity{
             neutral = ImageIO.read(getClass().getResourceAsStream("/res/player/neutral.png"));
             left = ImageIO.read(getClass().getResourceAsStream("/res/player/left.png"));
             right = ImageIO.read(getClass().getResourceAsStream("/res/player/right.png"));
-
+            attack = ImageIO.read(getClass().getResourceAsStream("/res/player/attack.png"));
+            shoot = ImageIO.read(getClass().getResourceAsStream("/res/player/shoot.png"));
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -114,7 +115,7 @@ public class Player extends LivingEntity{
         }
         updateBullets();
         // movimiento
-        if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed || keyH.shotPressed){
+        if (keyH.uPressed || keyH.dPressed || keyH.lPressed || keyH.rPressed){
             if (keyH.focusPressed){
                 speed = 4;
             }
@@ -149,9 +150,15 @@ public class Player extends LivingEntity{
             if (keyH.shotPressed && cooldown <= 0){
                 bullets.add(new Bullet(gp,x + 8, y, 10, 90, 0));
                 cooldown = 2;
+                sprite = "shoot";
             }
             if (keyH.meleePressed){
                 mActive = 2;
+                if (sprite != "attack"){
+                    sprite = "attack";
+                } else {
+                    sprite = "neutral";
+                }
             }
             if (keyH.lSelection){
                 if (selection > 0 && selCooldown <= 0){
@@ -202,6 +209,12 @@ public class Player extends LivingEntity{
         // Sprite
         if (iframes < 0) {
             switch (sprite){
+                case "attack":
+                    image = attack;
+                    break;
+                case "shoot":
+                    image = shoot;
+                    break;
                 case "neutral":
                     image = neutral;
                     break;

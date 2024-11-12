@@ -12,15 +12,13 @@ public class UserInterface {
     GamePanel gp;
     public UserInterface(GamePanel gp){
         this.gp = gp;
-        getUiImage();
     }
-    public void getUiImage(){
+    public void setUiImage(String backdrop){
         try{
-            image = ImageIO.read(getClass().getResourceAsStream("/res/ui/testui.png"));
+            image = ImageIO.read(getClass().getResourceAsStream(backdrop));
         } catch(IOException e){
             e.printStackTrace();
         }
-        //image = gp.stage.backDrop;
     }
     public void draw(Graphics2D g){
         //ui

@@ -14,6 +14,7 @@ public class Stage04 extends Stage{
         backColor = Color.DARK_GRAY;
         name = "4";
         UI = new UserInterface(gp);
+        UI.setUiImage("/res/ui/stage04.png");
         player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);
         gp.saveProgress(gp.score, Integer.parseInt(name));

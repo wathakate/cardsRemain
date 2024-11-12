@@ -15,9 +15,9 @@ public class Stage01 extends Stage{
     public Stage01(GamePanel gp, KeyHandler keyH) throws IOException {
         super(gp, keyH);
         backColor = Color.LIGHT_GRAY;
-        backDrop = ImageIO.read(getClass().getResourceAsStream("/res/ui/testui.png"));
         name = "1";
         UI = new UserInterface(gp);
+        UI.setUiImage("/res/ui/stage01.png");
         player = new Player(gp,this,keyH);
         eManager = new EnemyManager(gp);
         gp.saveProgress(gp.score, Integer.parseInt(name));
