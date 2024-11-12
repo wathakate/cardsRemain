@@ -12,7 +12,7 @@ public class hearthPattern extends SpellCard {
     public hearthPattern(GamePanel gp, Entity parent) {
         super(gp);
         this.parent = parent;
-        patterns.add(new BulletGenerator(gp, 1, parent.x, parent.y, 20, 1, 2, 5, 0, 0, 0, 1));
+        patterns.add(new BulletGenerator(gp, 1, parent.x, parent.y, 15, 1, 2, 5, 0, 0, 0, 1));
         patterns.get(0).dir = -90;
     }
 
@@ -24,6 +24,6 @@ public class hearthPattern extends SpellCard {
         } else if (patterns.get(0).dir <= -135) {
             direc = 1;
         }
-        patterns.get(0).dir += direc*2;
+        patterns.get(0).dir += direc*3;
     }
 }
