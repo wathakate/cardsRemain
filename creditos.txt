@@ -1,8 +1,7 @@
 Fondo de Stage01: https://www.flickr.com/photos/psyberartist/3985185966/
-Fondo de Stage02:
-Fondo de Stage03:
-Fondo de Stage04: https://www.flickr.com/photos/peterthoeny/53693144566
-Fondo de Stage05: https://www.flickr.com/photos/blueridgekitties/16598329449
-Fondo de Stage06:
+Fondo de Stage02: https://www.flickr.com/photos/universidadcatolica/4521853388
+                  https://commons.wikimedia.org/wiki/File:Whitewater_baldy_night_fire_2012-06-06.jpg
+Fondo de Stage03: https://www.flickr.com/photos/peterthoeny/53693144566
+Fondo de Stage04: https://www.flickr.com/photos/blueridgekitties/16598329449
 
 Enemigos: https://commons.wikimedia.org/wiki/Category:SVG_playing_cards#/media/File:Four-color_deck.svg
