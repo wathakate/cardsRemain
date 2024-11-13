@@ -20,7 +20,7 @@ public class Boss extends Enemy{
         sp[3] = new tiredDef(gp,this);
         sp[4] = new emLaserDef(gp,this);
         hitbox = new Rectangle(x, y, gp.trueTileS*2, gp.trueTileS*2);
-        setImage("/res/enemy/testEm.png");
+        setImage("/res/enemy/boss.png");
     }
 
     @Override
