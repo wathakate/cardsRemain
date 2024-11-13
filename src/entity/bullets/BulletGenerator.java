@@ -19,7 +19,7 @@ public class BulletGenerator {
     int speed; // Velocidad de las valas
     int dModifier; // Cuanto cambia de angulo del BulletGenerator
     int perBlMod; //Complicado de explicar, revise update
-    int curve; // Cuanto cambia el angulo de las balas
+    float curve; // Cuanto cambia el angulo de las balas
     int type;
 
     // No declarados en instanciacion
@@ -27,7 +27,7 @@ public class BulletGenerator {
     int bAmount = 0;
     public int dir = 0;
 
-    public BulletGenerator(GamePanel gp,int damage,int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,int curve, int type){
+    public BulletGenerator(GamePanel gp,int damage,int spawnX, int spawnY, int amount, int amPerCycle, int interval, int speed, int dModifier, int perBlMod,float curve, int type){
         this.gp = gp;
         this.damage = damage;
         this.spawnX = spawnX;
@@ -52,7 +52,7 @@ public class BulletGenerator {
     }
     public void update(){
         for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).direction += curve;
+            bullets.get(i).direction += (int) curve;
             bullets.get(i).update();
             if (bullets.get(i).isOffscreen()){
                 bullets.remove(i);

@@ -10,7 +10,7 @@ import java.awt.*;
 public class Clover extends Enemy{
     public Clover(GamePanel gp, int speedX, int speedY) {
         super(gp, speedX, speedY);
-        setImage("/res/enemy/testEm.png");
+        setImage("/res/enemy/clover.png");
         lives = 60;
         scoreGiven = 25;
         collTrue = true;
